@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: ipl-auction-game
+    runtime: node
+    plan: free
+    buildCommand: cd frontend && npm install && npm run build
+    startCommand: cd backend && npm start
+    healthCheckPath: /
+    envVars:
+      - key: NODE_ENV
+        value: production

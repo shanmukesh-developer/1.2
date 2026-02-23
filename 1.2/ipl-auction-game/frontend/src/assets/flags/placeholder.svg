@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="200" viewBox="0 0 320 200">
+  <rect width="320" height="200" rx="24" fill="#0B1020"/>
+  <path d="M0 0h320v66H0z" fill="#22D3EE" opacity="0.25"/>
+  <path d="M0 67h320v66H0z" fill="#F5C542" opacity="0.20"/>
+  <path d="M0 134h320v66H0z" fill="#3B82F6" opacity="0.25"/>
+  <text x="160" y="116" text-anchor="middle" font-family="ui-sans-serif, system-ui" font-size="20" fill="rgba(255,255,255,0.85)">FLAG</text>
+</svg>
