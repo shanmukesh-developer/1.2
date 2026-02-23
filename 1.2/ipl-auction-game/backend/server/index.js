@@ -14,9 +14,18 @@ import {
 } from '../../frontend/src/utils/auctionLogic.js'
 
 const PORT = Number(process.env.PORT || 3001)
+const NODE_ENV = process.env.NODE_ENV || 'development'
 const app = express()
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
+
+// Middleware: add CORS headers for frontend communication
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*')
+  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
+  res.header('Access-Control-Allow-Headers', 'Content-Type')
+  next()
+})
 
 // Serve static files from the built frontend
 app.use(express.static(join(__dirname, '../../frontend/dist')))

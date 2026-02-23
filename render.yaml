@@ -3,9 +3,11 @@ services:
     type: web
     env: node
     branch: main
-    # Ensure devDependencies (vite) are installed so the build can run
     buildCommand: cd 1.2/ipl-auction-game/frontend && yarn install --production=false && yarn build
-    startCommand: cd 1.2/ipl-auction-game/frontend && yarn preview --port $PORT
+    startCommand: cd 1.2/ipl-auction-game/frontend && yarn preview
+    envVars:
+      - key: NODE_ENV
+        value: production
     publishPath: 1.2/ipl-auction-game/frontend/dist
 
   - name: ipl-auction-backend
@@ -14,3 +16,8 @@ services:
     branch: main
     buildCommand: cd 1.2/ipl-auction-game/backend && yarn install
     startCommand: cd 1.2/ipl-auction-game/backend && node server/index.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3001
