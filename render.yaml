@@ -1,0 +1,15 @@
+services:
+  - name: ipl-auction-frontend
+    type: web
+    env: node
+    branch: main
+    buildCommand: cd 1.2/ipl-auction-game/frontend && yarn install && yarn build
+    startCommand: cd 1.2/ipl-auction-game/frontend && yarn preview --port $PORT
+    publishPath: 1.2/ipl-auction-game/frontend/dist
+
+  - name: ipl-auction-backend
+    type: web
+    env: node
+    branch: main
+    buildCommand: cd 1.2/ipl-auction-game/backend && yarn install
+    startCommand: cd 1.2/ipl-auction-game/backend && node server/index.js
