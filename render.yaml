@@ -3,8 +3,9 @@ services:
     type: web
     env: node
     branch: main
-    buildCommand: cd 1.2/ipl-auction-game/frontend && yarn install --production=false && yarn build
-    startCommand: cd 1.2/ipl-auction-game/frontend && yarn preview
+    # npm ci installs exact versions from package-lock.json; includes devDependencies by default
+    buildCommand: cd 1.2/ipl-auction-game/frontend && npm ci && npm run build
+    startCommand: cd 1.2/ipl-auction-game/frontend && npm run preview
     envVars:
       - key: NODE_ENV
         value: production
@@ -14,7 +15,7 @@ services:
     type: web
     env: node
     branch: main
-    buildCommand: cd 1.2/ipl-auction-game/backend && yarn install
+    buildCommand: cd 1.2/ipl-auction-game/backend && npm ci
     startCommand: cd 1.2/ipl-auction-game/backend && node server/index.js
     envVars:
       - key: NODE_ENV
