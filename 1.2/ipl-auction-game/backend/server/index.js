@@ -1,4 +1,5 @@
 import http from 'node:http'
+import fs from 'node:fs'
 import { Server } from 'socket.io'
 import express from 'express'
 import { fileURLToPath } from 'node:url'
@@ -25,6 +26,22 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
   res.header('Access-Control-Allow-Headers', 'Content-Type')
   next()
+})
+
+// Health check endpoint for Render monitoring
+app.get('/health', (req, res) => {
+  res.json({ status: 'ok', env: NODE_ENV, timestamp: new Date().toISOString() })
+})
+
+// API endpoint to check frontend dist availability
+app.get('/api/status', (req, res) => {
+  const distExists = fs.existsSync(join(__dirname, '../../frontend/dist'))
+  res.json({ 
+    backend: 'ok', 
+    frontend_dist_exists: distExists,
+    env: NODE_ENV,
+    port: PORT
+  })
 })
 
 // Serve static files from the built frontend
@@ -614,5 +631,10 @@ io.on('connection', (socket) => {
 })
 
 httpServer.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`)
+  const distPath = join(__dirname, '../../frontend/dist')
+  const distExists = fs.existsSync(distPath)
+  console.log(`\n✨ [${NODE_ENV.toUpperCase()}] Server running at http://localhost:${PORT}`)
+  console.log(`📁 Frontend dist folder: ${distExists ? '✓ Ready' : '✗ Not found (will be created on first build)'}`)
+  console.log(`🔗 Health check: GET /health`)
+  console.log(`📊 Status API: GET /api/status\n`)
 })

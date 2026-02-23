@@ -3,22 +3,20 @@ services:
     type: web
     env: node
     branch: main
-    # npm ci installs exact versions from package-lock.json; includes devDependencies by default
+    # npm ci installs exact versions; includes devDependencies for vite
     buildCommand: cd 1.2/ipl-auction-game/frontend && npm ci && npm run build
     startCommand: cd 1.2/ipl-auction-game/frontend && npm run preview
     envVars:
       - key: NODE_ENV
         value: production
-    publishPath: 1.2/ipl-auction-game/frontend/dist
 
   - name: ipl-auction-backend
     type: web
     env: node
     branch: main
+    # Backend serves frontend dist and provides Socket.io API
     buildCommand: cd 1.2/ipl-auction-game/backend && npm ci
     startCommand: cd 1.2/ipl-auction-game/backend && node server/index.js
     envVars:
       - key: NODE_ENV
         value: production
-      - key: PORT
-        value: 3001
