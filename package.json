@@ -1,0 +1,13 @@
+{
+  "name": "ipl-auction-game-root",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "start": "cd 1.2/ipl-auction-game/frontend && yarn start",
+    "build": "cd 1.2/ipl-auction-game/frontend && yarn build",
+    "test": "cd 1.2/ipl-auction-game/frontend && yarn test --if-present"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
